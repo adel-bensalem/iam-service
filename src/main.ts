@@ -8,6 +8,8 @@ import { createController } from "./controllers/main";
 import { createPresenter } from "./libs/presenter";
 import { createRepository } from "./libs/repository";
 import { createPasswordEncryptor } from "./libs/passwordEncryptor";
+import { createTokenProvider } from "./libs/tokenProvider";
+import { createSafeGuard } from "./libs/safeGuard";
 import { router } from "./router/main";
 
 const app = express();
@@ -16,6 +18,7 @@ const dbUser = process.env.DB_USER;
 const dbPassword = process.env.DB_PASSWORD;
 const dbHost = process.env.DB_HOST;
 const dbName = process.env.DB_NAME;
+const tokenSecret = process.env.JWT_SECRET || "";
 
 const mongoClient = new MongoClient(
   `mongodb://${dbUser}:${dbPassword}@${dbHost}/${dbName}`,
@@ -38,6 +41,8 @@ mongoClient.connect().then(() => {
         repository: createRepository(mongoClient.db(dbName)),
         presenter,
         passwordEncryptor: createPasswordEncryptor(),
+        tokenProvider: createTokenProvider(tokenSecret),
+        safeGuard: createSafeGuard(tokenSecret),
       }),
       req,
       res

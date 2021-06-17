@@ -11,6 +11,12 @@ function createPresenter(response: Response): Presenter {
         .status(error.hasInvalidName || error.hasInvalidPassword ? 403 : 500)
         .send(error);
     },
+    presentAuthenticationSuccess(token) {
+      response.status(200).send({ token });
+    },
+    presentAuthenticationFailure(error) {
+      response.status(error.unAuthorizedOperation ? 403 : 500).send(error);
+    },
   };
 }
 
