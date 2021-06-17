@@ -15,7 +15,8 @@
     "outDir": "./dist",
     "paths": {
       "@core": ["./core/main.ts"],
-      "@types": ["./types/main.ts"]
+      "@types": ["./types/main.ts"],
+      "@controllers": ["./controllers/main.ts"]
     }
   },
   "include": ["src"]
