@@ -5,3 +5,5 @@ export * from "./credentials";
 export * from "./authenticationError";
 export * from "./group";
 export * from "./groupCreationError";
+export * from "./id";
+export * from "./userToGroupAdditionError";

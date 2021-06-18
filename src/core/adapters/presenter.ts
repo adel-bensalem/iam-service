@@ -3,14 +3,25 @@ import {
   Credentials,
   Group,
   GroupCreationError,
+  Id,
   Identifiable,
   User,
   UserCreationError,
+  UserToGroupAdditionError,
 } from "@types";
 
 interface Presenter {
   presentGroupCreationSuccess(group: Identifiable<Group>): void;
   presentGroupCreationFailure(error: GroupCreationError, group: Group): void;
+  presentUserToGroupAdditionSuccess(
+    user: Identifiable<User>,
+    group: Identifiable<Group>
+  ): void;
+  presentUserToGroupAdditionFailure(
+    error: UserToGroupAdditionError,
+    userId: Id,
+    groupId: Id
+  ): void;
   presentUserCreationSuccess(user: Identifiable<User>): void;
   presentUserCreationFailure(error: UserCreationError, user: User): void;
   presentAuthenticationSuccess(token: string): void;

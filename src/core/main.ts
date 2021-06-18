@@ -15,11 +15,16 @@ import {
   createGroupCreationInteractor,
   GroupCreationInteractor,
 } from "./useCases/createGroup";
+import {
+  createUserToGroupAdditionInteractor,
+  UserToGroupAdditionInteractor,
+} from "./useCases/addUserToGroup";
 
 type Core = {
   createUser: UserCreationInteractor;
   authenticate: AuthenticationInteractor;
   createGroup: GroupCreationInteractor;
+  addUserToGroup: UserToGroupAdditionInteractor;
 };
 
 type DependenciesMap = {
@@ -44,6 +49,10 @@ function createCore(dependencies: DependenciesMap): Core {
       dependencies.presenter
     ),
     createGroup: createGroupCreationInteractor(
+      dependencies.repository,
+      dependencies.presenter
+    ),
+    addUserToGroup: createUserToGroupAdditionInteractor(
       dependencies.repository,
       dependencies.presenter
     ),
