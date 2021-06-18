@@ -20,6 +20,23 @@ function createRepository(db: Db): Repository {
           .then((user) => (user ? resolve(user) : reject()))
       );
     },
+    saveGroup(group) {
+      return db
+        .collection("groups")
+        .insertOne(group)
+        .then(({ insertedId }) => ({
+          ...group,
+          id: insertedId,
+        }));
+    },
+    findGroupByName(name) {
+      return new Promise((resolve, reject) =>
+        db
+          .collection("groups")
+          .findOne({ name: { $eq: name } })
+          .then((user) => (user ? resolve(user) : reject()))
+      );
+    },
   };
 }
 

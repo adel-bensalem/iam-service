@@ -11,10 +11,15 @@ import {
   createAuthenticationInteractor,
   AuthenticationInteractor,
 } from "./useCases/authenticate";
+import {
+  createGroupCreationInteractor,
+  GroupCreationInteractor,
+} from "./useCases/createGroup";
 
 type Core = {
   createUser: UserCreationInteractor;
   authenticate: AuthenticationInteractor;
+  createGroup: GroupCreationInteractor;
 };
 
 type DependenciesMap = {
@@ -36,6 +41,10 @@ function createCore(dependencies: DependenciesMap): Core {
       dependencies.repository,
       dependencies.tokenProvider,
       dependencies.safeGuard,
+      dependencies.presenter
+    ),
+    createGroup: createGroupCreationInteractor(
+      dependencies.repository,
       dependencies.presenter
     ),
   };
