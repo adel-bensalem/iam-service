@@ -4,6 +4,7 @@ interface Controller {
   createGroup(): void;
   addUserToGroup(): void;
   removeUserFromGroup(): void;
+  grantUserPermission(): void;
 }
 
 export { Controller };

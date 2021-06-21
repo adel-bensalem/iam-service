@@ -8,3 +8,6 @@ export * from "./groupCreationError";
 export * from "./id";
 export * from "./userToGroupAdditionError";
 export * from "./userFromGroupRemovalError";
+export * from "./resource";
+export * from "./userPermissionGrantError";
+export * from "./permission";

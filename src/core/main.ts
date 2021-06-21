@@ -23,6 +23,10 @@ import {
   createUserFromGroupRemovalInteractor,
   UserFromGroupRemovalInteractor,
 } from "./useCases/removeUserFromGroup";
+import {
+  createUserPermissionGrantInteractor,
+  UserPermissionGrantInteractor,
+} from "./useCases/grantUserPermission";
 
 type Core = {
   createUser: UserCreationInteractor;
@@ -30,6 +34,7 @@ type Core = {
   createGroup: GroupCreationInteractor;
   addUserToGroup: UserToGroupAdditionInteractor;
   removeUserFromGroup: UserFromGroupRemovalInteractor;
+  grantUserPermission: UserPermissionGrantInteractor;
 };
 
 type DependenciesMap = {
@@ -62,6 +67,10 @@ function createCore(dependencies: DependenciesMap): Core {
       dependencies.presenter
     ),
     removeUserFromGroup: createUserFromGroupRemovalInteractor(
+      dependencies.repository,
+      dependencies.presenter
+    ),
+    grantUserPermission: createUserPermissionGrantInteractor(
       dependencies.repository,
       dependencies.presenter
     ),

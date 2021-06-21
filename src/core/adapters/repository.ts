@@ -1,4 +1,5 @@
-import { Group, Id, Identifiable, User } from "@types";
+import { Group, Id, Identifiable, Resource, User } from "@types";
+import { Permission } from "../../types/permission";
 
 interface Repository {
   findUserByName(name: string): Promise<Identifiable<User>>;
@@ -15,6 +16,11 @@ interface Repository {
     group: Identifiable<Group>,
     user: Identifiable<User>
   ): Promise<void>;
+  saveUserPermissions(
+    user: Identifiable<User>,
+    resource: Resource,
+    permissions: Permission
+  ): Promise<Permission>;
 }
 
 export { Repository };
