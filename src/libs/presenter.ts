@@ -3,13 +3,28 @@ import { Presenter } from "@core";
 
 function createPresenter(response: Response): Presenter {
   return {
-    presentUserToGroupAdditionSuccess(user, group) {
+    presentUserFromGroupRemovalSuccess(user, group) {
+      response.status(200).send({
+        user: { id: user.id, name: user.name },
+        group: { id: group.id, name: group.name },
+      });
+    },
+    presentUserFromGroupRemovalFailure(error) {
       response
-        .status(200)
-        .send({
-          user: { id: user.id, name: user.name },
-          group: { id: group.id, name: group.name },
-        });
+        .status(
+          error.wasPermissionDenied
+            ? 403
+            : error.wasGroupNotFound || error.wasUserNotFound
+            ? 404
+            : 500
+        )
+        .send(error);
+    },
+    presentUserToGroupAdditionSuccess(user, group) {
+      response.status(200).send({
+        user: { id: user.id, name: user.name },
+        group: { id: group.id, name: group.name },
+      });
     },
     presentUserToGroupAdditionFailure(error) {
       response

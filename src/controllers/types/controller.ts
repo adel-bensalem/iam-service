@@ -3,6 +3,7 @@ interface Controller {
   authenticate(): void;
   createGroup(): void;
   addUserToGroup(): void;
+  removeUserFromGroup(): void;
 }
 
 export { Controller };

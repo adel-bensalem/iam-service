@@ -1,13 +1,12 @@
 import { Id } from "@types";
-import { Presenter } from "../adapters/presenter";
-import { Repository } from "../adapters/repository";
+import { Presenter, Repository } from "@core";
 
-type UserToGroupAdditionInteractor = (userId: Id, groupId: Id) => void;
+type UserFromGroupRemovalInteractor = (userId: Id, groupId: Id) => void;
 
-function createUserToGroupAdditionInteractor(
+function createUserFromGroupRemovalInteractor(
   repository: Repository,
   presenter: Presenter
-): UserToGroupAdditionInteractor {
+): UserFromGroupRemovalInteractor {
   return (userId, groupId) => {
     repository
       .findUserById(userId)
@@ -16,13 +15,13 @@ function createUserToGroupAdditionInteractor(
           .findGroupById(groupId)
           .then((group) =>
             repository
-              .addUserToGroup(group, user)
+              .removeUserFromGroup(group, user)
               .then(() =>
-                presenter.presentUserToGroupAdditionSuccess(user, group)
+                presenter.presentUserFromGroupRemovalSuccess(user, group)
               )
           )
           .catch(() =>
-            presenter.presentUserToGroupAdditionFailure(
+            presenter.presentUserFromGroupRemovalFailure(
               {
                 wasGroupNotFound: true,
                 wasPermissionDenied: false,
@@ -34,7 +33,7 @@ function createUserToGroupAdditionInteractor(
           )
       )
       .catch(() =>
-        presenter.presentUserToGroupAdditionFailure(
+        presenter.presentUserFromGroupRemovalFailure(
           {
             wasGroupNotFound: false,
             wasPermissionDenied: false,
@@ -47,4 +46,4 @@ function createUserToGroupAdditionInteractor(
   };
 }
 
-export { createUserToGroupAdditionInteractor, UserToGroupAdditionInteractor };
+export { createUserFromGroupRemovalInteractor, UserFromGroupRemovalInteractor };

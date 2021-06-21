@@ -82,6 +82,18 @@ function createRepository(db: Db): Repository {
           .catch(reject)
       );
     },
+    removeUserFromGroup(group, user) {
+      return new Promise((resolve, reject) =>
+        db
+          .collection("groupsUsers")
+          .deleteOne({
+            groupId: { $eq: new ObjectId(group.id) },
+            userId: { $eq: new ObjectId(user.id) },
+          })
+          .then(() => resolve())
+          .catch(reject)
+      );
+    },
   };
 }
 

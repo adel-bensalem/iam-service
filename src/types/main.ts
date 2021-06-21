@@ -7,3 +7,4 @@ export * from "./group";
 export * from "./groupCreationError";
 export * from "./id";
 export * from "./userToGroupAdditionError";
+export * from "./userFromGroupRemovalError";

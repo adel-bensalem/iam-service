@@ -11,6 +11,10 @@ interface Repository {
     group: Identifiable<Group>,
     user: Identifiable<User>
   ): Promise<void>;
+  removeUserFromGroup(
+    group: Identifiable<Group>,
+    user: Identifiable<User>
+  ): Promise<void>;
 }
 
 export { Repository };

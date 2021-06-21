@@ -7,6 +7,7 @@ import {
   Identifiable,
   User,
   UserCreationError,
+  UserFromGroupRemovalError,
   UserToGroupAdditionError,
 } from "@types";
 
@@ -19,6 +20,15 @@ interface Presenter {
   ): void;
   presentUserToGroupAdditionFailure(
     error: UserToGroupAdditionError,
+    userId: Id,
+    groupId: Id
+  ): void;
+  presentUserFromGroupRemovalSuccess(
+    user: Identifiable<User>,
+    group: Identifiable<Group>
+  ): void;
+  presentUserFromGroupRemovalFailure(
+    error: UserFromGroupRemovalError,
     userId: Id,
     groupId: Id
   ): void;
