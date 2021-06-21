@@ -94,6 +94,28 @@ function createRepository(db: Db): Repository {
           .catch(reject)
       );
     },
+    saveUserPermissions(user, resource, permission) {
+      return new Promise((resolve, reject) =>
+        db
+          .collection("usersPermissions")
+          .updateOne(
+            {
+              userId: { $eq: new ObjectId(user.id) },
+              "resource.name": { $eq: resource.name },
+            },
+            {
+              $set: {
+                userId: user.id,
+                resource,
+                permission,
+              },
+            },
+            { upsert: true }
+          )
+          .then(() => resolve(permission))
+          .catch(reject)
+      );
+    },
   };
 }
 

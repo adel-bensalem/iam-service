@@ -5,13 +5,27 @@ import {
   GroupCreationError,
   Id,
   Identifiable,
+  Resource,
   User,
   UserCreationError,
   UserFromGroupRemovalError,
+  UserPermissionGrantError,
   UserToGroupAdditionError,
 } from "@types";
+import { Permission } from "../../types/permission";
 
 interface Presenter {
+  presentUserPermissionGrantSuccess(
+    user: Identifiable<User>,
+    resource: Resource,
+    permission: Permission
+  ): void;
+  presentUserPermissionGrantFailure(
+    error: UserPermissionGrantError,
+    userId: Id,
+    resource: Resource,
+    permission: Permission
+  ): void;
   presentGroupCreationSuccess(group: Identifiable<Group>): void;
   presentGroupCreationFailure(error: GroupCreationError, group: Group): void;
   presentUserToGroupAdditionSuccess(

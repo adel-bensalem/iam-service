@@ -6,6 +6,7 @@ import { authenticate } from "./authenticate";
 import { createGroup } from "./createGroup";
 import { addUserToGroup } from "./addUserToGroup";
 import { removeUserFromGroup } from "./removeUserFromGroup";
+import { grantUserPermission } from "./grantUserPermission";
 
 function createController(
   core: Core,
@@ -18,6 +19,7 @@ function createController(
     createGroup: createGroup(core, request, response),
     addUserToGroup: addUserToGroup(core, request, response),
     removeUserFromGroup: removeUserFromGroup(core, request, response),
+    grantUserPermission: grantUserPermission(core, request, response),
   };
 }
 
