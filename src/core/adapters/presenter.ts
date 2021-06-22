@@ -14,9 +14,21 @@ import {
   UserPermissionGrantError,
   UserToGroupAdditionError,
   Permission,
+  GroupPermissionGrantError,
 } from "@types";
 
 interface Presenter {
+  presentGroupPermissionGrantSuccess(
+    group: Identifiable<Group>,
+    resource: Resource,
+    permission: Permission
+  ): void;
+  presentGroupPermissionGrantFailure(
+    error: GroupPermissionGrantError,
+    groupId: Id,
+    resource: Resource,
+    permission: Permission
+  ): void;
   presentUserPermissionGrantSuccess(
     user: Identifiable<User>,
     resource: Resource,

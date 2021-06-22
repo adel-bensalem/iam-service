@@ -116,6 +116,28 @@ function createRepository(db: Db): Repository {
           .catch(reject)
       );
     },
+    saveGroupPermissions(group, resource, permission) {
+      return new Promise((resolve, reject) =>
+        db
+          .collection("groupsPermissions")
+          .updateOne(
+            {
+              groupId: { $eq: new ObjectId(group.id) },
+              "resource.name": { $eq: resource.name },
+            },
+            {
+              $set: {
+                groupId: group.id,
+                resource,
+                permission,
+              },
+            },
+            { upsert: true }
+          )
+          .then(() => resolve(permission))
+          .catch(reject)
+      );
+    },
   };
 }
 
