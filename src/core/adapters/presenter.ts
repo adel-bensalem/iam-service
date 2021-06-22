@@ -16,6 +16,7 @@ import {
   Permission,
   GroupPermissionGrantError,
   UserPolicyGrantError,
+  GroupPolicyGrantError,
 } from "@types";
 
 interface Presenter {
@@ -74,6 +75,15 @@ interface Presenter {
   presentUserPolicyGrantFailure(
     error: UserPolicyGrantError,
     userId: Id,
+    policyName: string
+  ): void;
+  presentGroupPolicyGrantSuccess(
+    group: Identifiable<Group>,
+    policy: Policy
+  ): void;
+  presentGroupPolicyGrantFailure(
+    error: GroupPolicyGrantError,
+    groupId: Id,
     policyName: string
   ): void;
 }

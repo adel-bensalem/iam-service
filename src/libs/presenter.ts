@@ -33,6 +33,22 @@ function createPresenter(response: Response): Presenter {
         .status(200)
         .send({ user: { id: user.id, name: user.name }, policy });
     },
+    presentGroupPolicyGrantFailure(error): void {
+      response
+        .status(
+          error.wasPermissionDenied
+            ? 403
+            : error.wasGroupNotFound || error.wasPolicyNotFound
+            ? 404
+            : 500
+        )
+        .send(error);
+    },
+    presentGroupPolicyGrantSuccess(group, policy): void {
+      response
+        .status(200)
+        .send({ group: { id: group.id, name: group.name }, policy });
+    },
     presentUserPermissionGrantFailure(error): void {
       response
         .status(

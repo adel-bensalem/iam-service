@@ -15,3 +15,4 @@ export * from "./policy";
 export * from "./policySetError";
 export * from "./groupPermissionGrantError";
 export * from "./userPolicyGrantError";
+export * from "./groupPolicyGrantError";
