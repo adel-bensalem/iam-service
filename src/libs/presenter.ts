@@ -11,13 +11,27 @@ function createPresenter(response: Response): Presenter {
         .send(error);
     },
     presentGroupPermissionGrantSuccess(group, resource, permission): void {
+      response.status(200).send({
+        group: { id: group.id, name: group.name },
+        resource,
+        permission,
+      });
+    },
+    presentUserPolicyGrantFailure(error): void {
+      response
+        .status(
+          error.wasPermissionDenied
+            ? 403
+            : error.wasUserNotFound || error.wasPolicyNotFound
+            ? 404
+            : 500
+        )
+        .send(error);
+    },
+    presentUserPolicyGrantSuccess(user, policy): void {
       response
         .status(200)
-        .send({
-          group: { id: group.id, name: group.name },
-          resource,
-          permission,
-        });
+        .send({ user: { id: user.id, name: user.name }, policy });
     },
     presentUserPermissionGrantFailure(error): void {
       response

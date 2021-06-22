@@ -15,6 +15,7 @@ import {
   UserToGroupAdditionError,
   Permission,
   GroupPermissionGrantError,
+  UserPolicyGrantError,
 } from "@types";
 
 interface Presenter {
@@ -69,6 +70,12 @@ interface Presenter {
   ): void;
   presentPolicySetSuccess(policy: Policy): void;
   presentPolicySetFailure(error: PolicySetError, policy: Policy): void;
+  presentUserPolicyGrantSuccess(user: Identifiable<User>, policy: Policy): void;
+  presentUserPolicyGrantFailure(
+    error: UserPolicyGrantError,
+    userId: Id,
+    policyName: string
+  ): void;
 }
 
 export { Presenter };

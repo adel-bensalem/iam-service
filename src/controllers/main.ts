@@ -8,6 +8,7 @@ import { addUserToGroup } from "./addUserToGroup";
 import { removeUserFromGroup } from "./removeUserFromGroup";
 import { grantUserPermission } from "./grantUserPermission";
 import { grantGroupPermission } from "./grantGroupPermission";
+import { grantUserPolicy } from "./grantUserPolicy";
 import { setPolicy } from "./setPolicy";
 
 function createController(
@@ -23,6 +24,7 @@ function createController(
     removeUserFromGroup: removeUserFromGroup(core, request, response),
     grantUserPermission: grantUserPermission(core, request, response),
     grantGroupPermission: grantGroupPermission(core, request, response),
+    grantUserPolicy: grantUserPolicy(core, request, response),
     setPolicy: setPolicy(core, request, response),
   };
 }
