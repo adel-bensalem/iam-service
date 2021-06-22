@@ -138,6 +138,27 @@ function createRepository(db: Db): Repository {
           .catch(reject)
       );
     },
+    saveUserPolicy(user, policy) {
+      return new Promise((resolve, reject) =>
+        db
+          .collection("usersPolicies")
+          .updateOne(
+            {
+              userId: { $eq: new ObjectId(user.id) },
+              "policy.name": { $eq: policy.name },
+            },
+            {
+              $set: {
+                userId: user.id,
+                policy,
+              },
+            },
+            { upsert: true }
+          )
+          .then(() => resolve())
+          .catch(reject)
+      );
+    },
   };
 }
 
