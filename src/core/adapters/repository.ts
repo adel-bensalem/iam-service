@@ -20,6 +20,11 @@ interface Repository {
     resource: Resource,
     permissions: Permission
   ): Promise<Permission>;
+  saveGroupPermissions(
+    group: Identifiable<Group>,
+    resource: Resource,
+    permissions: Permission
+  ): Promise<Permission>;
 }
 
 export { Repository };

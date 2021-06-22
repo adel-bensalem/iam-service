@@ -32,6 +32,10 @@ import {
   createPolicySetInteractor,
   PolicySetInteractor,
 } from "./useCases/setPolicy";
+import {
+  createGroupPermissionGrantInteractor,
+  GroupPermissionGrantInteractor,
+} from "./useCases/grantGroupPermission";
 
 type Core = {
   createUser: UserCreationInteractor;
@@ -41,6 +45,7 @@ type Core = {
   removeUserFromGroup: UserFromGroupRemovalInteractor;
   grantUserPermission: UserPermissionGrantInteractor;
   setPolicy: PolicySetInteractor;
+  grantGroupPermission: GroupPermissionGrantInteractor;
 };
 
 type DependenciesMap = {
@@ -78,6 +83,10 @@ function createCore(dependencies: DependenciesMap): Core {
       dependencies.presenter
     ),
     grantUserPermission: createUserPermissionGrantInteractor(
+      dependencies.repository,
+      dependencies.presenter
+    ),
+    grantGroupPermission: createGroupPermissionGrantInteractor(
       dependencies.repository,
       dependencies.presenter
     ),

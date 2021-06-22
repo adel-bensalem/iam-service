@@ -5,6 +5,7 @@ interface Controller {
   addUserToGroup(): void;
   removeUserFromGroup(): void;
   grantUserPermission(): void;
+  grantGroupPermission(): void;
   setPolicy(): void;
 }
 
