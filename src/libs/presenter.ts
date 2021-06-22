@@ -84,6 +84,20 @@ function createPresenter(response: Response): Presenter {
     presentAuthenticationFailure(error) {
       response.status(error.unAuthorizedOperation ? 403 : 500).send(error);
     },
+    presentPolicySetFailure(error): void {
+      response
+        .status(
+          error.wasPermissionDenied ||
+            error.arePolicyStatementsInvalid ||
+            error.isPolicyNameInvalid
+            ? 403
+            : 500
+        )
+        .send(error);
+    },
+    presentPolicySetSuccess(policy): void {
+      response.status(200).send(policy);
+    },
   };
 }
 

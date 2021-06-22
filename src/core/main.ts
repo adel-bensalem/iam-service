@@ -3,6 +3,7 @@ import { Repository } from "./adapters/repository";
 import { PasswordEncryptor } from "./adapters/passwordEncryptor";
 import { TokenProvider } from "./adapters/tokenProvider";
 import { SafeGuard } from "./adapters/safeGuard";
+import { RuleBook } from "./adapters/ruleBook";
 import {
   createUserCreationInteractor,
   UserCreationInteractor,
@@ -27,6 +28,10 @@ import {
   createUserPermissionGrantInteractor,
   UserPermissionGrantInteractor,
 } from "./useCases/grantUserPermission";
+import {
+  createPolicySetInteractor,
+  PolicySetInteractor,
+} from "./useCases/setPolicy";
 
 type Core = {
   createUser: UserCreationInteractor;
@@ -35,6 +40,7 @@ type Core = {
   addUserToGroup: UserToGroupAdditionInteractor;
   removeUserFromGroup: UserFromGroupRemovalInteractor;
   grantUserPermission: UserPermissionGrantInteractor;
+  setPolicy: PolicySetInteractor;
 };
 
 type DependenciesMap = {
@@ -43,6 +49,7 @@ type DependenciesMap = {
   passwordEncryptor: PasswordEncryptor;
   tokenProvider: TokenProvider;
   safeGuard: SafeGuard;
+  ruleBook: RuleBook;
 };
 
 function createCore(dependencies: DependenciesMap): Core {
@@ -74,6 +81,10 @@ function createCore(dependencies: DependenciesMap): Core {
       dependencies.repository,
       dependencies.presenter
     ),
+    setPolicy: createPolicySetInteractor(
+      dependencies.ruleBook,
+      dependencies.presenter
+    ),
   };
 }
 
@@ -85,4 +96,5 @@ export {
   PasswordEncryptor,
   TokenProvider,
   SafeGuard,
+  RuleBook,
 };

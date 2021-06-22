@@ -12,4 +12,4 @@ const schema = {
 const validateResource = (resource: Resource): boolean =>
   validate(resource, schema).valid;
 
-export { validateResource };
+export { validateResource, schema };
