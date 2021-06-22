@@ -11,3 +11,5 @@ export * from "./userFromGroupRemovalError";
 export * from "./resource";
 export * from "./userPermissionGrantError";
 export * from "./permission";
+export * from "./policy";
+export * from "./policySetError";

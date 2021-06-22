@@ -5,14 +5,16 @@ import {
   GroupCreationError,
   Id,
   Identifiable,
+  Policy,
+  PolicySetError,
   Resource,
   User,
   UserCreationError,
   UserFromGroupRemovalError,
   UserPermissionGrantError,
   UserToGroupAdditionError,
+  Permission,
 } from "@types";
-import { Permission } from "../../types/permission";
 
 interface Presenter {
   presentUserPermissionGrantSuccess(
@@ -53,6 +55,8 @@ interface Presenter {
     error: AuthenticationError,
     credentials: Credentials
   ): void;
+  presentPolicySetSuccess(policy: Policy): void;
+  presentPolicySetFailure(error: PolicySetError, policy: Policy): void;
 }
 
 export { Presenter };

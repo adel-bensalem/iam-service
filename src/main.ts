@@ -10,6 +10,7 @@ import { createRepository } from "./libs/repository";
 import { createPasswordEncryptor } from "./libs/passwordEncryptor";
 import { createTokenProvider } from "./libs/tokenProvider";
 import { createSafeGuard } from "./libs/safeGuard";
+import { createRuleBook } from "./libs/ruleBook";
 import { router } from "./router/main";
 
 const app = express();
@@ -35,14 +36,16 @@ const listenToExit = (cleanUp: () => void) => {
 mongoClient.connect().then(() => {
   app.use(express.json());
   app.use((req, res, next) => {
+    const db = mongoClient.db(dbName);
     const presenter = createPresenter(res);
     req.controller = createController(
       createCore({
-        repository: createRepository(mongoClient.db(dbName)),
+        repository: createRepository(db),
         presenter,
         passwordEncryptor: createPasswordEncryptor(),
         tokenProvider: createTokenProvider(tokenSecret),
         safeGuard: createSafeGuard(tokenSecret),
+        ruleBook: createRuleBook(db),
       }),
       req,
       res

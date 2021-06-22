@@ -14,4 +14,4 @@ const schema = {
 const validatePermissions = (permission: Permission): boolean =>
   validate(permission, schema).valid;
 
-export { validatePermissions };
+export { validatePermissions, schema };

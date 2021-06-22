@@ -5,6 +5,7 @@ interface Controller {
   addUserToGroup(): void;
   removeUserFromGroup(): void;
   grantUserPermission(): void;
+  setPolicy(): void;
 }
 
 export { Controller };

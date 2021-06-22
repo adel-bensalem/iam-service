@@ -1,5 +1,4 @@
-import { Group, Id, Identifiable, Resource, User } from "@types";
-import { Permission } from "../../types/permission";
+import { Group, Id, Identifiable, Resource, User, Permission } from "@types";
 
 interface Repository {
   findUserByName(name: string): Promise<Identifiable<User>>;
