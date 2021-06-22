@@ -159,6 +159,27 @@ function createRepository(db: Db): Repository {
           .catch(reject)
       );
     },
+    saveGroupPolicy(group, policy) {
+      return new Promise((resolve, reject) =>
+        db
+          .collection("groupsPolicies")
+          .updateOne(
+            {
+              groupId: { $eq: new ObjectId(group.id) },
+              "policy.name": { $eq: policy.name },
+            },
+            {
+              $set: {
+                groupId: group.id,
+                policy,
+              },
+            },
+            { upsert: true }
+          )
+          .then(() => resolve())
+          .catch(reject)
+      );
+    },
   };
 }
 

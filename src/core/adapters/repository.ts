@@ -34,6 +34,7 @@ interface Repository {
     permissions: Permission
   ): Promise<Permission>;
   saveUserPolicy(user: Identifiable<User>, policy: Policy): Promise<void>;
+  saveGroupPolicy(group: Identifiable<Group>, policy: Policy): Promise<void>;
 }
 
 export { Repository };
