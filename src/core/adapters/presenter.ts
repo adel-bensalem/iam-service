@@ -18,6 +18,7 @@ import {
   UserPolicyGrantError,
   GroupPolicyGrantError,
   UserPermissionInsuranceError,
+  UserPermissionsRetrievalError,
 } from "@types";
 
 interface Presenter {
@@ -97,6 +98,13 @@ interface Presenter {
     userId: Id,
     resource: Resource,
     intent: string
+  ): void;
+  presentUserPermissionsRetrievalSuccess(
+    permissions: { resource: Resource; permission: Permission }[]
+  ): void;
+  presentUserPermissionsRetrievalFailure(
+    error: UserPermissionsRetrievalError,
+    userId: Id
   ): void;
 }
 

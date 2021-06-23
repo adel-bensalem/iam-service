@@ -36,6 +36,9 @@ interface Repository {
   saveUserPolicy(user: Identifiable<User>, policy: Policy): Promise<void>;
   saveGroupPolicy(group: Identifiable<Group>, policy: Policy): Promise<void>;
   getUserPermissions(
+    user: Identifiable<User>
+  ): Promise<{ resource: Resource; permission: Permission }[]>;
+  getUserPermissionsOnResource(
     user: Identifiable<User>,
     resource: Resource
   ): Promise<Permission[]>;
