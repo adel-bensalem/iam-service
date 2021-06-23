@@ -3,6 +3,16 @@ import { Presenter } from "@core";
 
 function createPresenter(response: Response): Presenter {
   return {
+    presentUserPermissionInsuranceFailure(error): void {
+      response
+        .status(
+          error.wasPermissionDenied ? 403 : error.wasUserNotFound ? 404 : 500
+        )
+        .send(error);
+    },
+    presentUserPermissionInsuranceSuccess(): void {
+      response.sendStatus(200);
+    },
     presentGroupPermissionGrantFailure(error): void {
       response
         .status(

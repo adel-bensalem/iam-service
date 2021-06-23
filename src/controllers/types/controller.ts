@@ -8,6 +8,7 @@ interface Controller {
   grantGroupPermission(): void;
   grantUserPolicy(): void;
   grantGroupPolicy(): void;
+  ensureUserPermission(): void;
   setPolicy(): void;
 }
 

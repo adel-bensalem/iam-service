@@ -1,5 +1,6 @@
 import { Db, ObjectId } from "mongodb";
 import { Repository } from "@core";
+import { Permission } from "@types";
 
 function createRepository(db: Db): Repository {
   return {
@@ -179,6 +180,81 @@ function createRepository(db: Db): Repository {
           .then(() => resolve())
           .catch(reject)
       );
+    },
+    getUserPermissions(user, resource) {
+      return new Promise((resolve, reject) =>
+        db
+          .collection("usersPermissions")
+          .aggregate([
+            {
+              $match: {
+                userId: { $eq: new ObjectId(user.id) },
+                "resource.name": { $eq: resource.name },
+              },
+            },
+            {
+              $lookup: {
+                from: "groupsUsers",
+                localField: "userId",
+                foreignField: "userId",
+                as: "groups",
+              },
+            },
+            {
+              $lookup: {
+                from: "groupsPermissions",
+                localField: "groups.groupId",
+                foreignField: "groupId",
+                as: "groupsPermissions",
+              },
+            },
+            {
+              $lookup: {
+                from: "groupsPolicies",
+                localField: "groups.groupId",
+                foreignField: "groupId",
+                as: "groupsPolicies",
+              },
+            },
+            {
+              $lookup: {
+                from: "usersPolicies",
+                localField: "userId",
+                foreignField: "userId",
+                as: "usersPolicies",
+              },
+            },
+          ])
+          .toArray()
+          .then(([res]) => (res ? resolve(res) : reject()))
+      ).then((res: any) => [
+        res.permission,
+        ...res.groupsPermissions.map(
+          (groupsPermission: any) => groupsPermission.permission
+        ),
+        ...res.groupsPolicies.reduce(
+          (acc: Permission[], groupsPolicy: any) => [
+            ...acc,
+            ...groupsPolicy.policy.statements
+              .filter(
+                (statement: any) => statement.resource.name === resource.name
+              )
+              .map(({ permission }: { permission: Permission }) => permission),
+          ],
+          []
+        ),
+        ...res.usersPolicies.reduce(
+          (acc: Permission[], usersPolicy: any) => [
+            ...acc,
+            ...usersPolicy.policy.statements
+              .filter(
+                (statement: any) => statement.resource.name === resource.name
+              )
+              .map(({ permission }: { permission: Permission }) => permission),
+          ],
+          []
+        ),
+      ]);
     },
   };
 }

@@ -8,6 +8,7 @@ import { grantUserPermission } from "./grantUserPermission";
 import { grantGroupPermission } from "./grantGroupPermission";
 import { grantUserPolicy } from "./grantUserPolicy";
 import { grantGroupPolicy } from "./grantGroupPolicy";
+import { ensureUserPermission } from "./ensureUserPermission";
 import { policySetRouter } from "./setPolicy";
 
 const router = Router();
@@ -21,6 +22,7 @@ router.use(grantUserPermission);
 router.use(grantGroupPermission);
 router.use(grantUserPolicy);
 router.use(grantGroupPolicy);
+router.use(ensureUserPermission);
 router.use(policySetRouter);
 
 export { router };
