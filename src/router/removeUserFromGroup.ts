@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-export const removeUserFromGroup = Router().delete(
+export const removeUserFromGroupRouter = Router().delete(
   "/groups/:groupId/users/:userId",
   (req) => req.controller.removeUserFromGroup()
 );

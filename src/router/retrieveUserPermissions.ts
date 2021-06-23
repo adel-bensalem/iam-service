@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-export const retrieveUserPermissions = Router().get(
+export const retrieveUserPermissionsRouter = Router().get(
   "/users/:userId/permissions",
   (req) => req.controller.retrieveUserPermissions()
 );
