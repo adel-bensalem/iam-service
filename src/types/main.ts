@@ -18,3 +18,4 @@ export * from "./userPolicyGrantError";
 export * from "./groupPolicyGrantError";
 export * from "./intent";
 export * from "./userPermissionInsuranceError";
+export * from "./userPermissionsRetrievalError";

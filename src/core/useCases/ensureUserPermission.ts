@@ -18,7 +18,7 @@ function createUserPermissionInsuranceInteractor(
       .findUserById(userId)
       .then((user) =>
         repository
-          .getUserPermissions(user, resource)
+          .getUserPermissionsOnResource(user, resource)
           .then((permissions) =>
             hasPermission(intent, permissions)
               ? presenter.presentUserPermissionInsuranceSuccess(

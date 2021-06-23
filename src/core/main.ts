@@ -48,6 +48,10 @@ import {
   createUserPermissionInsuranceInteractor,
   UserPermissionInsuranceInteractor,
 } from "./useCases/ensureUserPermission";
+import {
+  createUserPermissionsRetrievalInteractor,
+  UserPermissionsRetrievalInteractor,
+} from "./useCases/retrieveUserPermissions";
 
 type Core = {
   createUser: UserCreationInteractor;
@@ -61,6 +65,7 @@ type Core = {
   grantUserPolicy: UserPolicyGrantInteractor;
   grantGroupPolicy: GroupPolicyGrantInteractor;
   ensureUserPermission: UserPermissionInsuranceInteractor;
+  retrieveUserPermissions: UserPermissionsRetrievalInteractor;
 };
 
 type DependenciesMap = {
@@ -120,6 +125,10 @@ function createCore(dependencies: DependenciesMap): Core {
       dependencies.presenter
     ),
     ensureUserPermission: createUserPermissionInsuranceInteractor(
+      dependencies.repository,
+      dependencies.presenter
+    ),
+    retrieveUserPermissions: createUserPermissionsRetrievalInteractor(
       dependencies.repository,
       dependencies.presenter
     ),
