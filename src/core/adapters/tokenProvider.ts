@@ -1,7 +1,7 @@
-import { User } from "@types";
+import { Identifiable, User } from "@types";
 
 interface TokenProvider {
-  provideToken(user: User): Promise<string>;
+  provideToken(user: Identifiable<User>): Promise<string>;
 }
 
 export { TokenProvider };
