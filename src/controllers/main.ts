@@ -12,6 +12,7 @@ import { grantUserPolicy } from "./grantUserPolicy";
 import { grantGroupPolicy } from "./grantGroupPolicy";
 import { ensureUserPermission } from "./ensureUserPermission";
 import { retrieveUserPermissions } from "./retrieveUserPermissions";
+import { retrieveAccount } from "./retrieveAccount";
 import { setPolicy } from "./setPolicy";
 
 function createController(
@@ -32,6 +33,7 @@ function createController(
     ensureUserPermission: ensureUserPermission(core, request, response),
     setPolicy: setPolicy(core, request, response),
     retrieveUserPermissions: retrieveUserPermissions(core, request, response),
+    retrieveAccount: retrieveAccount(core, request, response),
   };
 }
 

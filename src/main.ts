@@ -11,6 +11,7 @@ import { createPasswordEncryptor } from "./libs/passwordEncryptor";
 import { createTokenProvider } from "./libs/tokenProvider";
 import { createSafeGuard } from "./libs/safeGuard";
 import { createRuleBook } from "./libs/ruleBook";
+import { createTokenDecoder } from "./libs/tokenDecoder";
 import { router } from "./router/main";
 
 const app = express();
@@ -46,6 +47,7 @@ mongoClient.connect().then(() => {
         tokenProvider: createTokenProvider(tokenSecret),
         safeGuard: createSafeGuard(tokenSecret),
         ruleBook: createRuleBook(db),
+        tokenDecoder: createTokenDecoder(tokenSecret),
       }),
       req,
       res

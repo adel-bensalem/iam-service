@@ -106,6 +106,8 @@ interface Presenter {
     error: UserPermissionsRetrievalError,
     userId: Id
   ): void;
+  presentAccountRetrievalSuccess(user: User): void;
+  presentAccountRetrievalFailure(): void;
 }
 
 export { Presenter };

@@ -11,9 +11,11 @@ import { grantGroupPolicyRouter } from "./grantGroupPolicy";
 import { ensureUserPermissionRouter } from "./ensureUserPermission";
 import { retrieveUserPermissionsRouter } from "./retrieveUserPermissions";
 import { policySetRouter } from "./setPolicy";
+import { retrieveAccount } from "./retrieveAccount";
 
 const router = Router();
 
+router.use(retrieveAccount);
 router.use(userCreationRouter);
 router.use(authenticationRouter);
 router.use(groupCreationRouter);
