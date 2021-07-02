@@ -10,6 +10,7 @@ interface Controller {
   grantGroupPolicy(): void;
   ensureUserPermission(): void;
   retrieveUserPermissions(): void;
+  retrieveAccount(): void;
   setPolicy(): void;
 }
 

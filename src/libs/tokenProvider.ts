@@ -3,8 +3,8 @@ import jwt from "jsonwebtoken";
 
 function createTokenProvider(secret: string): TokenProvider {
   return {
-    provideToken(user) {
-      return Promise.resolve(jwt.sign(user.name, secret));
+    provideToken({ name }) {
+      return Promise.resolve(jwt.sign({ name }, secret));
     },
   };
 }
