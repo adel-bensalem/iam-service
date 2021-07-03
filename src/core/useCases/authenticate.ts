@@ -18,15 +18,26 @@ function createAuthenticationInteractor(
       .then((user) =>
         safeGuard
           .ensureUserPassword(credentials.password, user.password)
-          .then(() => user)
+          .then(() => tokenProvider.provideToken(user))
+          .then(presenter.presentAuthenticationSuccess)
+          .catch(() =>
+            presenter.presentAuthenticationFailure(
+              {
+                wasAccountNotFound: false,
+                unAuthorizedOperation: true,
+                hasUnExpectedError: false,
+              },
+              credentials
+            )
+          )
       )
-      .then(tokenProvider.provideToken)
-      .then(presenter.presentAuthenticationSuccess)
       .catch((e) =>
         presenter.presentAuthenticationFailure(
           {
-            unAuthorizedOperation: e.unAuthorizedOperation,
-            hasUnExpectedError: !e.unAuthorizedOperation,
+            wasAccountNotFound: true,
+            unAuthorizedOperation: false,
+            hasUnExpectedError: false,
+            ...e,
           },
           credentials
         )

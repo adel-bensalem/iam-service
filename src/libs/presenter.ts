@@ -154,7 +154,15 @@ function createPresenter(response: Response): Presenter {
       response.status(200).send({ token });
     },
     presentAuthenticationFailure(error) {
-      response.status(error.unAuthorizedOperation ? 403 : 500).send(error);
+      response
+        .status(
+          error.unAuthorizedOperation
+            ? 403
+            : error.wasAccountNotFound
+            ? 404
+            : 500
+        )
+        .send(error);
     },
     presentPolicySetFailure(error): void {
       response
