@@ -190,7 +190,7 @@ function createRepository(db: Db): Repository {
               $match: {
                 userId: { $eq: new ObjectId(user.id) },
                 "resource.name": {
-                  $eq: new RegExp(
+                  $regex: new RegExp(
                     resource.name.replace(/\./g, "\\.").replace("*", ".")
                   ),
                 },
