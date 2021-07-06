@@ -12,6 +12,7 @@ import { ensureUserPermissionRouter } from "./ensureUserPermission";
 import { retrieveUserPermissionsRouter } from "./retrieveUserPermissions";
 import { policySetRouter } from "./setPolicy";
 import { retrieveAccount } from "./retrieveAccount";
+import { retrieveAccessibleResourcesRouter } from "./retrieveAccessibleResources";
 
 const router = Router();
 
@@ -28,5 +29,6 @@ router.use(grantGroupPolicyRouter);
 router.use(ensureUserPermissionRouter);
 router.use(retrieveUserPermissionsRouter);
 router.use(policySetRouter);
+router.use(retrieveAccessibleResourcesRouter);
 
 export { router };

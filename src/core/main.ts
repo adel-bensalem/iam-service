@@ -57,6 +57,10 @@ import {
   createAccountRetrievalInteractor,
   AccountRetrievalInteractor,
 } from "./useCases/retrieveAccount";
+import {
+  createAccessibleResourcesRetrievalInteractor,
+  AccessibleResourcesRetrievalInteractor,
+} from "./useCases/retrieveAccessibleResources";
 
 type Core = {
   createUser: UserCreationInteractor;
@@ -72,6 +76,7 @@ type Core = {
   ensureUserPermission: UserPermissionInsuranceInteractor;
   retrieveUserPermissions: UserPermissionsRetrievalInteractor;
   retrieveAccount: AccountRetrievalInteractor;
+  retrieveAccessibleResources: AccessibleResourcesRetrievalInteractor;
 };
 
 type DependenciesMap = {
@@ -141,6 +146,10 @@ function createCore(dependencies: DependenciesMap): Core {
     ),
     retrieveAccount: createAccountRetrievalInteractor(
       dependencies.tokenDecoder,
+      dependencies.presenter
+    ),
+    retrieveAccessibleResources: createAccessibleResourcesRetrievalInteractor(
+      dependencies.repository,
       dependencies.presenter
     ),
   };

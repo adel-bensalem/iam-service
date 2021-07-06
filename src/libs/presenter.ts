@@ -3,6 +3,12 @@ import { Presenter } from "@core";
 
 function createPresenter(response: Response): Presenter {
   return {
+    presentAccessibleResourcesRetrievalFailure(error): void {
+      response.status(error.wasUserNotFound ? 404 : 500).send(error);
+    },
+    presentAccessibleResourcesRetrievalSuccess(resources): void {
+      response.status(200).send(resources);
+    },
     presentAccountRetrievalFailure(): void {
       response.sendStatus(404);
     },

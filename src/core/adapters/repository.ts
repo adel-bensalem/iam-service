@@ -6,6 +6,7 @@ import {
   User,
   Permission,
   Policy,
+  ResourcesRetrievalFilter,
 } from "@types";
 
 interface Repository {
@@ -42,6 +43,10 @@ interface Repository {
     user: Identifiable<User>,
     resource: Resource
   ): Promise<Permission[]>;
+  getUserAccessibleResources(
+    user: Identifiable<User>,
+    filter: ResourcesRetrievalFilter
+  ): Promise<Identifiable<Resource>[]>;
 }
 
 export { Repository };

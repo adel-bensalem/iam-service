@@ -19,9 +19,18 @@ import {
   GroupPolicyGrantError,
   UserPermissionInsuranceError,
   UserPermissionsRetrievalError,
+  AccessibleResourcesRetrievalError,
+  ResourcesRetrievalFilter,
 } from "@types";
 
 interface Presenter {
+  presentAccessibleResourcesRetrievalSuccess(
+    resources: Identifiable<Resource>[]
+  ): void;
+  presentAccessibleResourcesRetrievalFailure(
+    error: AccessibleResourcesRetrievalError,
+    filter: ResourcesRetrievalFilter
+  ): void;
   presentGroupPermissionGrantSuccess(
     group: Identifiable<Group>,
     resource: Resource,

@@ -12,6 +12,7 @@ interface Controller {
   retrieveUserPermissions(): void;
   retrieveAccount(): void;
   setPolicy(): void;
+  retrieveAccessibleResources(): void;
 }
 
 export { Controller };
