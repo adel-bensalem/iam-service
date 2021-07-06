@@ -14,6 +14,7 @@ import { ensureUserPermission } from "./ensureUserPermission";
 import { retrieveUserPermissions } from "./retrieveUserPermissions";
 import { retrieveAccount } from "./retrieveAccount";
 import { setPolicy } from "./setPolicy";
+import { retrieveAccessibleResources } from "./retrieveAccessibleResources";
 
 function createController(
   core: Core,
@@ -34,6 +35,11 @@ function createController(
     setPolicy: setPolicy(core, request, response),
     retrieveUserPermissions: retrieveUserPermissions(core, request, response),
     retrieveAccount: retrieveAccount(core, request, response),
+    retrieveAccessibleResources: retrieveAccessibleResources(
+      core,
+      request,
+      response
+    ),
   };
 }
 

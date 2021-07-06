@@ -19,3 +19,5 @@ export * from "./groupPolicyGrantError";
 export * from "./intent";
 export * from "./userPermissionInsuranceError";
 export * from "./userPermissionsRetrievalError";
+export * from "./resourcesRetrievalFilter";
+export * from "./accessibleResourcesErrorRetrieval";
