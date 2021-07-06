@@ -417,6 +417,13 @@ function createRepository(db: Db): Repository {
               permission.canExecute === filter.permission.canExecute
           )
         )
+        .then((res: any[]) =>
+          res.filter(({ resource }) =>
+            new RegExp(
+              filter.name.replace(/\./g, "\\.").replace("*", ".")
+            ).test(resource.name)
+          )
+        )
         .then((res: any[]) => res.map(({ resource }) => resource));
     },
   };
